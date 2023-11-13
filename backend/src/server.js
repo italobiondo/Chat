@@ -11,6 +11,7 @@ wss.on("connection", (ws) => {
 
   ws.on("message", (data) => {
     // Broadcast to all clients
+    console.log(data.toString());
     wss.clients.forEach((client) => client.send(data.toString()));
   });
 
