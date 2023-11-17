@@ -9,6 +9,7 @@ const chatForm = chat.querySelector(".chat__form");
 const chatInput = chat.querySelector(".chat__input");
 const chatMessages = chat.querySelector(".chat__messages");
 
+//Cores e dados dos usuários
 const colors = [
   "darkkhaki", "cornflowerblue", "green", "gold", "purple", "orange", "hotpink"
 ]
@@ -17,6 +18,7 @@ const user = { id: "", name: "", color: "" }
 
 let webSocket;
 
+// Cria um elemento de mensagem própria (do usuário)
 const createMessageSelfElement = (content) => {
   const div = document.createElement("div")
 
@@ -26,6 +28,7 @@ const createMessageSelfElement = (content) => {
   return div
 }
 
+// Cria um elemento de mensagem de outro usuário
 const createMessageOtherElement = (content,sender,senderColor) => {
   const div = document.createElement("div")
   const span = document.createElement("span")
@@ -43,11 +46,13 @@ const createMessageOtherElement = (content,sender,senderColor) => {
   return div
 }
 
+// Retorna uma cor aleatória do array 'colors'
 const getRandomColor = () => {
   const randomIndex = Math.floor(Math.random() * colors.length)
   return colors[randomIndex]
 }
 
+// Faz scroll na tela para o fim da página
 const scrollScreen = () => {
   window.scrollTo({
     top: document.body.scrollHeight,
@@ -55,6 +60,7 @@ const scrollScreen = () => {
   })
 }
 
+// Processa a mensagem recebida pelo WebSocket
 const processMessage = ( {data} ) => {
   const { userId, userName, userColor, content } = JSON.parse(data)
 
@@ -67,6 +73,7 @@ const processMessage = ( {data} ) => {
   scrollScreen()
 }
 
+// Função que lida com o evento de login
 const handleLogin = (event) => {
   event.preventDefault()
 
@@ -81,6 +88,7 @@ const handleLogin = (event) => {
   webSocket.onmessage = processMessage
 }
 
+// Função que lida com o evento de envio de mensagem
 const sendMessage = (event) => {
   event.preventDefault()
 

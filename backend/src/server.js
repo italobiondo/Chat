@@ -1,8 +1,10 @@
 const { WebSocketServer } = require("ws");
 const dotenv = require("dotenv");
 
+// Load environment variables
 dotenv.config();
 
+// Create a server
 const wss = new WebSocketServer({ port: process.env.PORT || 8080 });
 
 // Connection opened
